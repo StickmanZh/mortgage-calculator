@@ -65,13 +65,18 @@ class Render implements ActionListener {
         String principalString = principalTF.getText();
         String interestRateString = interestRateTF.getText();
         String yearsString = yearsTF.getText();
+
         double principal = Double.parseDouble(principalString);
+
         double interestRatePerMonth = Double.parseDouble(interestRateString);
         interestRatePerMonth /= 12;
+
         double numberOfPayments = Double.parseDouble(yearsString);
         numberOfPayments *= 12;
+
         double monthlyPayment = (principal * interestRatePerMonth * Math.pow((1 + interestRatePerMonth), numberOfPayments)) / (Math.pow((1 + interestRatePerMonth), numberOfPayments) - 1);
-        resultTF.setText(String.valueOf(monthlyPayment));
+        double roundedPayment = Math.round(monthlyPayment * 100.0) / 100.0;
+        resultTF.setText("$" + String.valueOf(roundedPayment));
     }
 }
  
